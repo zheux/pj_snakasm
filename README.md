@@ -1,7 +1,14 @@
-# Snakasm
+#SNAKASM
 
-Integrantes y grupo.
+Juego Snake en ensamblador x86
 
-Describir todo lo que se realizó en el proyecto, dejando claro cuáles fueron las características que se implementaron.
+**Grupo:**   C-211
+  
+**Integrantes:**  
+- Hieu Do Ngoc  
+- Luis Alberto Diaz Borge
 
-Para más información acerca de la orientación del proyecto ir a [ORIENTACIÓN.md](ORIENTACIÓN.md)
+
+###To-do:    
+- Menu principal
+- Mecanismo de movimiento
