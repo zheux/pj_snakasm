@@ -1,5 +1,10 @@
 %include "video.mac"
 %include "keyboard.mac"
+%include "game.mac"
+
+
+section .data
+    state db 1
 
 section .text
 
@@ -7,61 +12,53 @@ extern clear
 extern scan
 extern calibrate
 
-; Bind a key to a procedure
-%macro bind 2
-  cmp byte [esp], %1
-  jne %%next
-  call %2
-  %%next:
-%endmacro
+extern menu_input_handler
 
-; Fill the screen with the given background color
-%macro FILL_SCREEN 1
-  push word %1
-  call clear
-  add esp, 2
-%endmacro
 
 global game
 game:
-  ; Initialize game
+   ; Initialize game
 
-  FILL_SCREEN BG.BLACK
+   FILL_SCREEN BG.BRIGHT
 
-  ; Calibrate the timing
-  call calibrate
+   ; Calibrate the timing
+   call calibrate
 
-  ; Snakasm main loop
-  game.loop:
-    .input:
+   ; Snakasm main loop
+   game.loop:
+      .input:
       call get_input
 
-    ; Main loop.
+      ; Main loop.
 
-    ; Here is where you will place your game logic.
-    ; Develop procedures like paint_map and update_content,
-    ; declare it extern and use here.
+      ; Here is where you will place your game logic.
+      ; Develop procedures like paint_map and update_content,
+      ; declare it extern and use here.
 
-    jmp game.loop
+      jmp game.loop
 
 
 draw.red:
-  FILL_SCREEN BG.RED
-  ret
-
+   FILL_SCREEN BG.RED
+   ret
 
 draw.green:
-  FILL_SCREEN BG.GREEN
-  ret
+   FILL_SCREEN BG.GREEN
+   ret
 
 
 get_input:
-    call scan
-    push ax
-    ; The value of the input is on 'word [esp]'
+   call scan
+   push ax
+   ; The value of the input is in 'word [esp]'
 
-    ; Your bindings here
-    
+   ; Push the game state for bindings
+   ; Input will now be on word[esp + 2]
+   mov al, [state]
+   push ax
 
-    add esp, 2 ; free the stack
-    ret
+   ; Handle input if on the mainmenu
+   bind 1, menu_input_handler
+
+   add esp, 4  ; free the stack
+   ret
