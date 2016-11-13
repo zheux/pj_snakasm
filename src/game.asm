@@ -12,6 +12,7 @@ extern clear
 extern scan
 extern calibrate
 
+extern draw_mainmenu
 extern menu_input_handler
 
 
@@ -20,6 +21,9 @@ game:
    ; Initialize game
 
    FILL_SCREEN BG.BRIGHT
+
+   ; Draw Main Menu
+   call draw_mainmenu
 
    ; Calibrate the timing
    call calibrate
