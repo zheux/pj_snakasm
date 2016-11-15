@@ -38,17 +38,14 @@ section .text
       paint_row logor6, FBUFFER + COLS * 2 * 7 + 40 + 160 * 5, 40
       ret
 
-; The value of the input is in word [esp + 6]
    global menu_input_handler
    menu_input_handler:
-      pop eax   ; save the call address
-      pop bx    ; save the game state var
+      pop eax   ; save the call address and puts input on word [esp]
 
       bind KEY.ENTER, keypress_enter
       bind KEY.UP, keypress_up
       bind KEY.DOWN, keypress_down
 
-      push bx
       push eax  ; return stack to previous state
       ret
 

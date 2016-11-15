@@ -4,7 +4,7 @@
 
 
 section .data
-    state db 1
+    gamestate db 1
 
 section .text
 
@@ -56,13 +56,8 @@ get_input:
    push ax
    ; The value of the input is in 'word [esp]'
 
-   ; Push the game state for bindings
-   ; Input will now be on word[esp + 2]
-   mov al, [state]
-   push ax
-
    ; Handle input if on the mainmenu
-   bind 1, menu_input_handler
+   bind_state 1, menu_input_handler
 
-   add esp, 4  ; free the stack
+   add esp, 2  ; free the stack
    ret

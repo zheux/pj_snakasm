@@ -8,6 +8,15 @@ section .text
   %%next:
 %endmacro
 
+; Bind a gamestate to a procedure
+%macro bind_state 2
+  cmp byte [gamestate], %1
+  jne %%next
+  call %2
+  %%next:
+%endmacro
+
+
 ; Fill the screen with the given background color
 %macro FILL_SCREEN 1
   push word %1
