@@ -23,19 +23,24 @@ section .data
    logor5 db "|___ | | | / ___ |  _ (/ ___ |___ | | | |"
    logor6 db "(___/|_| |_\_____|_| \_)_____(___/|_|_|_|"
 
+   ; Options names
+   single db "Singleplayer"
+   multi db "Multiplayer"
+   about db "About"
+
 
 section .text
    global draw_mainmenu
    draw_mainmenu:
       ;Draw mainmenu elements to fbuffer
 
-      ;Draw snakasm ascii art
-      paint_row logor1, FBUFFER + COLS * 2 * 7 + 40 + 160 * 0, 40
-      paint_row logor2, FBUFFER + COLS * 2 * 7 + 40 + 160 * 1, 40
-      paint_row logor3, FBUFFER + COLS * 2 * 7 + 40 + 160 * 2, 40
-      paint_row logor4, FBUFFER + COLS * 2 * 7 + 40 + 160 * 3, 40
-      paint_row logor5, FBUFFER + COLS * 2 * 7 + 40 + 160 * 4, 40
-      paint_row logor6, FBUFFER + COLS * 2 * 7 + 40 + 160 * 5, 40
+      ; Draw snakasm ascii art
+      paint_row logor1, FBUFFER + COLS * 2 * 7 + 40 + 160 * 0, 41
+      paint_row logor2, FBUFFER + COLS * 2 * 7 + 40 + 160 * 1, 41
+      paint_row logor3, FBUFFER + COLS * 2 * 7 + 40 + 160 * 2, 41
+      paint_row logor4, FBUFFER + COLS * 2 * 7 + 40 + 160 * 3, 41
+      paint_row logor5, FBUFFER + COLS * 2 * 7 + 40 + 160 * 4, 41
+      paint_row logor6, FBUFFER + COLS * 2 * 7 + 40 + 160 * 5, 41
       ret
 
    global menu_input_handler

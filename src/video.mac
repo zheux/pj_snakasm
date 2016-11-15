@@ -39,7 +39,7 @@ section .text
       mov [%2 + 2 * ecx], al
       inc ecx
       cmp ecx, %3
-      jle %%loop
+      jl %%loop
 
       pop ax
       pop ecx
