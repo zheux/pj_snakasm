@@ -25,3 +25,22 @@
 %define BG.BRIGHT  8 << 12
 
 %endif ; VIDEO_MAC
+
+section .text
+    ;macro para pintar en linea en fbuffer (a, b, c, d, e) a: posicion del byte[] q contiene lo q se va a pintar
+    ;b: posicion donde se empieza a pintar  c: cantidad de elementos a pintar    d: foreground color e: background color
+    %macro paint_row 3
+      push ecx
+      push ax
+
+      xor ecx, ecx
+      %%loop:
+      mov al, [%1 + ecx]
+      mov [%2 + 2 * ecx], al
+      inc ecx
+      cmp ecx, %3
+      jle %%loop
+
+      pop ax
+      pop ecx
+    %endmacro
