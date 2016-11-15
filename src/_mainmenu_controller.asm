@@ -1,5 +1,6 @@
 %include "game.mac"
 %include "keyboard.mac"
+%include "video.mac"
 
 %ifndef FBUFFER
    %define FBUFFER 0xB8000
@@ -14,10 +15,27 @@ section .data
    ; Indicates selected option: 1 for Singleplayer, 2 for Multiplayer, 3 for About  (Default is 1)
    cursor db 1
 
+   ; Snakasm ascii art
+   logor1 db "                  _                      "
+   logor2 db "                 | |                     "
+   logor3 db "  ___ ____  _____| |  _ _____  ___ ____  "
+   logor4 db " /___)  _ \(____ | |_/ |____ |/___)    \ "
+   logor5 db "|___ | | | / ___ |  _ (/ ___ |___ | | | |"
+   logor6 db "(___/|_| |_\_____|_| \_)_____(___/|_|_|_|"
+
+
 section .text
    global draw_mainmenu
    draw_mainmenu:
       ;Draw mainmenu elements to fbuffer
+
+      ;Draw snakasm ascii art
+      paint_row logor1, FBUFFER + COLS * 2 * 7 + 40 + 160 * 0, 40
+      paint_row logor2, FBUFFER + COLS * 2 * 7 + 40 + 160 * 1, 40
+      paint_row logor3, FBUFFER + COLS * 2 * 7 + 40 + 160 * 2, 40
+      paint_row logor4, FBUFFER + COLS * 2 * 7 + 40 + 160 * 3, 40
+      paint_row logor5, FBUFFER + COLS * 2 * 7 + 40 + 160 * 4, 40
+      paint_row logor6, FBUFFER + COLS * 2 * 7 + 40 + 160 * 5, 40
       ret
 
 ; The value of the input is in word [esp + 6]
