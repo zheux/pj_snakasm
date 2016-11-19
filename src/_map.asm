@@ -42,3 +42,21 @@ section .text
       pop edi
       xor eax, eax
       ret
+
+   ;to_ij(int fbuffer position) converts fbuffer position to corresponding (i, j)   ah: i  al: j
+   global to_ij
+   to_ij:
+      init_func
+      push ebx
+
+      mov eax, [ebp + 8]
+      mov ebx, 160
+      xor edx, edx
+      div ebx
+      mov ah, al
+      mov al, dl
+      dec al
+
+      pop ebx
+      end_func
+      ret
