@@ -53,6 +53,7 @@ section .text
       mov ebx, 160
       xor edx, edx
       div ebx
+      shr edx, 1
       mov ah, al
       mov al, dl
       dec al
