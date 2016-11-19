@@ -1,0 +1,12 @@
+%ifndef FBUFFER
+   %define FBUFFER 0xB8000
+%endif
+
+%define MAP.TOPLEFT FBUFFER + 2 * 15 + COLS * 2
+%define MAP.ROWS 23
+%define MAP.COLS 52
+
+%define MAP.BOUND_LEFT 16
+%define MAP.BOUND_RIGHT MAP.BOUND_LEFT + MAP.COLS - 2
+%define MAP.BOUND_UP 2
+%define MAP.BOUND_DOWN MAP.BOUND_UP + MAP.ROWS - 3
