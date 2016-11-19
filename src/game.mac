@@ -8,8 +8,6 @@
    pop ebp
 %endmacro
 
-section .text
-
 ; Bind a key to a procedure
 %macro bind 2
   cmp byte [esp], %1
