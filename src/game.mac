@@ -1,3 +1,13 @@
+%macro init_func 0
+   push ebp
+   mov ebp, esp
+%endmacro
+
+%macro end_func 0
+   mov esp, ebp
+   pop ebp
+%endmacro
+
 section .text
 
 ; Bind a key to a procedure
