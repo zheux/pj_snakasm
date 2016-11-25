@@ -24,7 +24,8 @@ section .text
       sub ebx, 4
       add ebx, snake
       mov eax, [ebx]
-      mov [eax], byte 0
+      mov bx, 0 | BG.BRIGHT
+      mov [eax], bx
 
       pop eax
       pop ebx
