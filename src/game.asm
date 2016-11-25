@@ -1,10 +1,12 @@
 %include "video.mac"
 %include "keyboard.mac"
 %include "game.mac"
+%include "_snake.mac"
 
 
 section .data
-    gamestate db 1
+   global gamestate
+   gamestate db 1
 
 section .text
 
@@ -14,6 +16,7 @@ extern calibrate
 
 extern draw_mainmenu
 extern menu_input_handler
+extern game_input_handler
 
 
 global game
@@ -58,6 +61,7 @@ get_input:
 
    ; Handle input if on the mainmenu
    bind_state 1, menu_input_handler
+   bind_state 2, game_input_handler
 
    add esp, 2  ; free the stack
    ret

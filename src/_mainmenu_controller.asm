@@ -29,7 +29,23 @@ section .data
    multi db "Multiplayer"
    about db "About"
 
+   extern gamestate
+
 section .text
+
+   %macro bind_option 2
+      cmp dword [selected], %1
+      jne .next
+      call %2
+      .next:
+   %endmacro
+
+
+   extern clear
+   extern start_new_singleplayer
+
+
+
    global draw_mainmenu
    draw_mainmenu:
       ;Draw mainmenu elements to fbuffer
@@ -66,6 +82,9 @@ section .text
    ; Handles enter button
    keypress_enter:
       ; Move to the menu selected
+      bind_option 1, to_singleplayer
+      ; bind_option 2, to_multiplayer
+      ; bind_option 3, to_about
       ret
 
    ; Handles up button
@@ -123,4 +142,16 @@ section .text
          jmp end_drawcursor
 
       end_drawcursor:
+      ret
+
+   to_singleplayer:
+      mov [gamestate], byte 2
+      mov ax, 0 | FG.BLACK | BG.BRIGHT
+      push ax
+      call clear
+      add esp, 2
+
+      call start_new_singleplayer
+
+      xor ax, ax
       ret
