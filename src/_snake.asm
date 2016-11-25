@@ -44,7 +44,7 @@ section .text
       mov [snake], dword SNAKE.STARTPOSITION_HEAD
       mov [snake + 4], dword SNAKE.STARTPOSITION_TAIL
       mov [snake + 8], dword SNAKE.STARTPOSITION_TAIL - 160
-      mov [snake + 12], dword SNAKE.STARTPOSITION_TAIL - 320
+      mov [snake_length], dword 3
       ret
 
 
