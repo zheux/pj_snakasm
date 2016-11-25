@@ -163,7 +163,7 @@ global move_down
       ret
 
 
-   global draw_snake
+global draw_snake
    draw_snake:
       init_func
       push edi
@@ -171,6 +171,13 @@ global move_down
 
       mov ecx, [snake_length]
       mov esi, snake
+
+      ;Draw head with different colors
+      mov edi, [esi]
+      add esi, 4
+      mov ax, SNAKE | FG.MAGENTA | BG.BLUE
+      mov [edi], ax
+
       .draw:
          mov edi, [esi]
          add esi, 4
