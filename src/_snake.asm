@@ -176,7 +176,7 @@ section .text
       .draw:
          mov edi, [esi]
          add esi, 4
-         mov ax, SNAKE | BG.BRIGHT
+         mov ax, SNAKE | FG.GRAY | BG.GREEN
          mov [edi], ax
          loop .draw
 
