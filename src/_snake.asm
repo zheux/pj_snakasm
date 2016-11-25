@@ -15,13 +15,6 @@ section .data
 section .text
    extern to_ij
 
-   %macro bind_movement 2
-      cmp byte [direction], %1
-      jne %%next
-      call %2
-      %%next:
-   %endmacro
-
    %macro erase_tail 0
       push ebx
       push eax
@@ -39,7 +32,7 @@ section .text
 
 
 
-   global reset_snake
+global reset_snake
    reset_snake:
       mov [snake], dword SNAKE.STARTPOSITION_HEAD
       mov [snake + 4], dword SNAKE.STARTPOSITION_TAIL
@@ -49,7 +42,8 @@ section .text
 
 
    ; validmove(int fbufferposition)  return whether the position is in the map (true 1 or false 0)
-   global validmove
+
+global validmove
    validmove:
       init_func
 
@@ -79,7 +73,7 @@ section .text
       end_func
       ret
 
-
+global move_left
    move_left:
       push ebx
 
@@ -101,6 +95,7 @@ section .text
       pop ebx
       ret
 
+global move_right
    move_right:
       push ebx
 
@@ -122,6 +117,7 @@ section .text
       pop ebx
       ret
 
+global move_up
    move_up:
       push ebx
 
@@ -143,6 +139,7 @@ section .text
       pop ebx
       ret
 
+global move_down
    move_down:
       push ebx
 
