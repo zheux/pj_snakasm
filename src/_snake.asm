@@ -9,7 +9,7 @@ section .data
    ; Snake direction: 1down 2up 3left 4right
    direction db 3
    snake times MAP.COLS * MAP.ROWS dd 0
-   snake_length dd 4
+   snake_length dd 0
 
 
 section .text
@@ -162,6 +162,10 @@ global move_down
       pop ebx
       ret
 
+global grow
+   grow:
+      inc dword [snake_length]
+      ret
 
 global draw_snake
    draw_snake:
@@ -170,6 +174,7 @@ global draw_snake
       push esi
 
       mov ecx, [snake_length]
+      dec ecx
       mov esi, snake
 
       ;Draw head with different colors

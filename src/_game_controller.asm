@@ -6,8 +6,10 @@ section .data
 
 section .text
    extern draw_map
+   
    extern reset_snake
    extern draw_snake
+   extern grow
 
    extern move_left
    extern move_right
