@@ -51,17 +51,17 @@ section .text
       ;Draw mainmenu elements to fbuffer
 
       ; Draw snakasm ascii art
-      paint_row logor1, FBUFFER + COLS * 2 * 7 + 40 + 160 * 0, 41
-      paint_row logor2, FBUFFER + COLS * 2 * 7 + 40 + 160 * 1, 41
-      paint_row logor3, FBUFFER + COLS * 2 * 7 + 40 + 160 * 2, 41
-      paint_row logor4, FBUFFER + COLS * 2 * 7 + 40 + 160 * 3, 41
-      paint_row logor5, FBUFFER + COLS * 2 * 7 + 40 + 160 * 4, 41
-      paint_row logor6, FBUFFER + COLS * 2 * 7 + 40 + 160 * 5, 41
+      paint_row logor1, FBUFFER + COLS * 2 * 7 + 40 + 160 * 0, 41, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row logor2, FBUFFER + COLS * 2 * 7 + 40 + 160 * 1, 41, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row logor3, FBUFFER + COLS * 2 * 7 + 40 + 160 * 2, 41, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row logor4, FBUFFER + COLS * 2 * 7 + 40 + 160 * 3, 41, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row logor5, FBUFFER + COLS * 2 * 7 + 40 + 160 * 4, 41, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row logor6, FBUFFER + COLS * 2 * 7 + 40 + 160 * 5, 41, GAME.FGCOLOR, GAME.BGCOLOR
 
       ; Draw options
-      paint_row single, 4 + FIRSTBUFFER, 13
-      paint_row multi , 4 + SECONDBUFFER + 2, 11
-      paint_row about , 4 + THIRDBUFFER + 8, 5
+      paint_row single, 4 + FIRSTBUFFER, 13, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row multi , 4 + SECONDBUFFER + 2, 11, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row about , 4 + THIRDBUFFER + 8, 5, GAME.FGCOLOR, GAME.BGCOLOR
 
       ; Draw cursor to first option
       mov [FIRSTBUFFER], byte CURSOR

@@ -1,4 +1,5 @@
 %include "video.mac"
+%include "game.mac"
 %include "_score.mac"
 
 section .data
@@ -9,6 +10,6 @@ section .data
 section .text
    global draw_score
    draw_score:
-      paint_row scoretxt, SCOREPOSITION, 5
-      paint_row highscoretxt, SCOREPOSITION - COLS * 2 * 4 - 2 * 2, 9
+      paint_row scoretxt, SCOREPOSITION, 5, GAME.FGCOLOR, GAME.BGCOLOR
+      paint_row highscoretxt, SCOREPOSITION - COLS * 2 * 4 - 2 * 2, 9, GAME.FGCOLOR, GAME.BGCOLOR
       ret
