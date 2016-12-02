@@ -1,0 +1,3 @@
+%include "video.mac"
+
+%define SCOREPOSITION 0xB8000 + 2 * 5 + COLS * 2 * 9
