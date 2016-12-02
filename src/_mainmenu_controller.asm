@@ -146,7 +146,7 @@ section .text
 
    to_singleplayer:
       mov [gamestate], byte 2
-      mov ax, 0 | FG.BLACK | BG.BRIGHT
+      mov ax, 0 | GAME.FGCOLOR | GAME.BGCOLOR
       push ax
       call clear
       add esp, 2
