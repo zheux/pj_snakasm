@@ -10,7 +10,7 @@
 %define FG.CYAN    3 << 8
 %define FG.RED     4 << 8
 %define FG.MAGENTA 5 << 8
-%define FG.YELLOW  6 << 8
+%define FG.BROWN   6 << 8
 %define FG.GRAY    7 << 8
 %define FG.BRIGHT  8 << 8
 
@@ -20,9 +20,21 @@
 %define BG.CYAN    3 << 12
 %define BG.RED     4 << 12
 %define BG.MAGENTA 5 << 12
-%define BG.YELLOW  6 << 12
+%define BG.BROWN   6 << 12
 %define BG.GRAY    7 << 12
 %define BG.BRIGHT  8 << 12
+
+;Video Attribute Byte Colors
+%define COLOR.BLACK   0
+%define COLOR.BLUE    1
+%define COLOR.GREEN   2
+%define COLOR.CYAN    3
+%define COLOR.RED     4
+%define COLOR.MAGENTA 5
+%define COLOR.YELLOW  6
+%define COLOR.GRAY    7
+%define COLOR.BRIGHT  8
+
 
 %endif ; VIDEO_MAC
 
