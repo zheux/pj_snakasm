@@ -1,12 +1,17 @@
 %include "keyboard.mac"
 %include "game.mac"
+%include "_map.mac"
+%include "video.mac"
 
 section .data
    extern gamestate
 
+   extern snake
+   extern snake_length
+
 section .text
    extern draw_map
-   
+
    extern reset_snake
    extern draw_snake
    extern grow
@@ -15,6 +20,16 @@ section .text
    extern move_right
    extern move_down
    extern move_up
+
+
+   ;%1: snake_address   %2:snake_length_address
+   %macro reset_snake_to_map 2
+      push dword MAP.TOPLEFT + COLS * 2 * (MAP.ROWS / 2) + 2 * (MAP.COLS / 2)
+      push %2
+      push %1
+      call reset_snake
+      add esp, 12
+   %endmacro
 
 
    global game_input_handler
@@ -34,6 +49,6 @@ section .text
    global start_new_singleplayer
    start_new_singleplayer:
       call draw_map
-      call reset_snake
+      reset_snake_to_map snake, snake_length
       call draw_snake
       ret

@@ -8,12 +8,16 @@
 section .data
    ; Snake direction: 1down 2up 3left 4right
    direction db 3
+
+   global snake
+   global snake_length
    snake times MAP.COLS * MAP.ROWS dd 0
-   snake_length dd 0
+   snake_length dd 1
 
 
 section .text
    extern to_ij
+
 
    %macro erase_tail 0
       push ebx
@@ -31,14 +35,48 @@ section .text
       pop ebx
    %endmacro
 
+   ;%1: address of snake to move    %2: direction  -2-left 2-right 160-down   -160-up
+   %macro move_snake 2
+      mov ebx, [%1]
+      add ebx, %2
+      push ebx
+      call validmove
+      add esp, 4
+
+      cmp eax, 0
+      je %%next
+
+      call update_tail
+      mov [%1], ebx
+      %%next:
+   %endmacro
 
 
+;reset_snake(d snake_address, d snake_length_address, d address_in_fbuffer) just put a 3-length snake top
+;to bottom starting at "address_in_fbuffer"
 global reset_snake
    reset_snake:
-      mov [snake], dword SNAKE.STARTPOSITION_HEAD
-      mov [snake + 4], dword SNAKE.STARTPOSITION_TAIL
-      mov [snake + 8], dword SNAKE.STARTPOSITION_TAIL - 160
-      mov [snake_length], dword 3
+      init_func
+
+      cld
+
+      mov eax, [ebp + 16]
+      mov edi, [ebp + 8]
+      stosd
+
+      ;reset the snake body (snake length = ecx + 1)
+      mov ecx, 2
+      .reset_body:
+         add eax, 160
+         stosd
+         loop .reset_body
+
+      ;move to snake_length_address the new length
+      mov eax, 3
+      mov edi, [ebp + 12]
+      stosd
+
+      end_func
       ret
 
 
@@ -74,99 +112,48 @@ global validmove
       end_func
       ret
 
+
+;Snake Movement
 global move_left
    move_left:
       push ebx
-
       erase_tail
-
-      mov ebx, [snake]
-      sub ebx, 2
-      push ebx
-      call validmove
-
-      cmp eax, 0
-      je .ret
-
-      call update_tail
-      mov [snake], ebx
-
-      .ret:
-      add esp, 4
+      move_snake snake, -2
       pop ebx
       ret
 
 global move_right
    move_right:
       push ebx
-
       erase_tail
-
-      mov ebx, [snake]
-      add ebx, 2
-      push ebx
-      call validmove
-
-      cmp eax, 0
-      je .ret
-
-      call update_tail
-      mov [snake], ebx
-
-      .ret:
-      add esp, 4
+      move_snake snake, 2
       pop ebx
       ret
 
 global move_up
    move_up:
       push ebx
-
       erase_tail
-
-      mov ebx, [snake]
-      sub ebx, 160
-      push ebx
-      call validmove
-
-      cmp eax, 0
-      je .ret
-
-      call update_tail
-      mov [snake], ebx
-
-      .ret:
-      add esp, 4
+      move_snake snake, -160
       pop ebx
       ret
 
 global move_down
    move_down:
       push ebx
-
       erase_tail
-
-      mov ebx, [snake]
-      add ebx, 160
-      push ebx
-      call validmove
-
-      cmp eax, 0
-      je .ret
-
-      call update_tail
-      mov [snake], ebx
-
-      .ret:
-      add esp, 4
+      move_snake snake, 160
       pop ebx
       ret
 
+;Snake Length
 global grow
    grow:
       inc dword [snake_length]
       ret
 
+
+;This goes in video.asm
 global draw_snake
    draw_snake:
       init_func
@@ -183,12 +170,12 @@ global draw_snake
       mov ax, SNAKE | FG.MAGENTA | BG.BLUE
       mov [edi], ax
 
-      .draw:
+      .drawbody:
          mov edi, [esi]
          add esi, 4
          mov ax, SNAKE | FG.GRAY | BG.GREEN
          mov [edi], ax
-         loop .draw
+         loop .drawbody
 
       pop esi
       pop edi
