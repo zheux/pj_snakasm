@@ -1,14 +1,14 @@
 #SNAKASM
 
-Juego Snake en ensamblador x86
+  Classic snake game for x86 written in nasm.
 
-**Grupo:**   C-211
+###Current Features:
+- Main Menu
+- Snake Movement
+
+###InDev:
+- Fruits
+- Snake Collision
+
+######Author: Hieu Do Ngoc
   
-**Integrantes:**  
-- Hieu Do Ngoc  
-- Luis Alberto Diaz Borge
-
-
-###To-do:    
-- Menu principal
-- Mecanismo de movimiento
