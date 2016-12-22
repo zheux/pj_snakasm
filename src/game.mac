@@ -1,10 +1,5 @@
 %include "video.mac"
 
-%ifndef GAME
-   %define GAME.BGCOLOR BG.BRIGHT
-   %define GAME.FGCOLOR FG.BLACK
-%endif
-
 %macro init_func 0
    push ebp
    mov ebp, esp

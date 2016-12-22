@@ -11,7 +11,7 @@ section .data
 
 section .text
    extern draw_map
-   extern draw_score
+   extern draw_scoreboard
 
    extern reset_snake
    extern draw_snake
@@ -50,7 +50,7 @@ section .text
    global start_new_singleplayer
    start_new_singleplayer:
       call draw_map
-      call draw_score
+      call draw_scoreboard
       reset_snake_to_map snake, snake_length
       call draw_snake
       ret

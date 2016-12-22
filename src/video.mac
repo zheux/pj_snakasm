@@ -38,7 +38,16 @@
 
 %endif ; VIDEO_MAC
 
+
+%define GAME.BGCOLOR BG.BRIGHT
+%define GAME.FGCOLOR FG.BLACK
+
+%define ITOAATT 0x0A06
+
+
 section .text
+   extern itoa
+
     ;macro para pintar en linea en fbuffer (a, b, c, d, e) a: posicion del byte[] q contiene lo q se va a pintar
     ;b: posicion donde se empieza a pintar  c: cantidad de elementos a pintar
     ;d: foreground color e: background color
@@ -59,3 +68,17 @@ section .text
       pop ax
       pop ecx
     %endmacro
+
+
+   %macro draw_dec 3
+      push edx
+
+      push word ITOAATT
+      push %1
+      call itoa
+      add esp, 6
+      mov edx, eax
+      paint_row edx, %2, %3, GAME.FGCOLOR, GAME.BGCOLOR
+
+      pop edx
+   %endmacro
