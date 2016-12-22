@@ -4,7 +4,7 @@
 
 %define MAP.TOPLEFT FBUFFER + 2 * 15 + COLS * 2
 %define MAP.ROWS 23
-%define MAP.COLS 52
+%define MAP.COLS 60
 
 %define MAP.BOUND_LEFT 15
 %define MAP.BOUND_RIGHT MAP.BOUND_LEFT + MAP.COLS - 2
